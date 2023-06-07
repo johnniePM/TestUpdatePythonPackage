@@ -10,17 +10,20 @@ import json
 def start():
     update=True
     while update:
-        version = 6
+        version = json.load(open("version.json"))
         req = requests.post("http://127.0.0.1:8000")
         req_ver = json.loads(req.text)["pk"]
-        req_enox = requests.get("http://127.0.0.1:8000/enox")
         if req_ver > version:
             update=False
 
         print("__________________Start__________________")
-        print("req_ver " + str(req_ver))
-        print(req_ver >= version)
-        print("version " + str(version))
-        print("__________________End____________________\n\n\n\n")
+        print("the version in the cloud:     " + str(req_ver))
+        print("Is there any newer version:?  "+str(req_ver >= version))
+        print("installed version:            " + str(version))
+        print("__________________End____________________\n\n")
 
         sleep(2)
+
+
+if __name__ == "__main__":
+    start()
