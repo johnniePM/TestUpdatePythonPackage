@@ -17,9 +17,9 @@ def start():
         print("the version in the cloud:     " + str(req_ver))
         print("Is there any newer version:?  "+str(req_ver > version))
         print("installed version:            " + str(version))
-        print("__________________________UPDATE______________________________")
-        print("__________________________UPDATE______________________________")
-        print("__________________________UPDATE______________________________")
+        print("__________________________Latest______________________________")
+        print("__________________________Latest______________________________")
+        print("__________________________Latest______________________________")
         print("__________________End____________________\n\n")
         if req_ver > version:
             update=False
