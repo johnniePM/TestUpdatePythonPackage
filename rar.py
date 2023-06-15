@@ -3,7 +3,8 @@ from time import sleep
 import requests
 import json
 import zipfile
-
+import pathlib
+import os
 # from reloading import reloading
 
 
@@ -21,26 +22,15 @@ def start():
         print("__________________________Latest______________________________")
         print("__________________________Latest______________________________")
         print("__________________End____________________\n\n")
-        if req_ver > version:
-            with requests.get("http://127.0.0.1:8000/enox", stream=True) as r:
-                try:
-                    r.raise_for_status()
-                    try:
-                        with open("main.zip", "wb") as f:
-                            for chunk in r.iter_content(chunk_size=8192):
-                                try:
-                                    f.write(chunk)
-                                except Exception as e:
-                                    print("Error 3: " + e)
-                            json.dump({"version": req_ver}, open("version.json", "w"))
-                    except Exception as e:
-                        print("Error 2: " + e)
-                    with zipfile.ZipFile("main.zip") as zip:
-                        zip.extractall()
-                except Exception as e:
-                    print("Error while updating the file:  " + e)
-            print("Script reloaded and function executed successfully.")
-
+        path=pathlib.Path('main.zip')
+        if(pathlib.Path.exists(path)):
+            try:
+                with zipfile.ZipFile("main.zip") as zip:
+                    zip.extractall()
+                os.remove("main.zip")
+                print("Script reloaded and function executed successfully.")
+            except:
+                print("ett problem har hänt")
         sleep(2)
 
 
